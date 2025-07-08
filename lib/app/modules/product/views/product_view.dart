@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx/app/modules/product/controllers/cart_controller.dart';
 import 'package:flutter_getx/app/modules/product/controllers/product_controller.dart';
+import 'package:flutter_getx/app/services/theme_service.dart';
 import 'package:get/get.dart';
 
 class ProductView extends StatelessWidget {
@@ -11,8 +12,24 @@ class ProductView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Product List'),
+        title: Text('product_list'.tr),
         actions: [
+          IconButton(
+            onPressed: () {
+              ThemeService().switchTheme();
+            },
+            icon: Icon(Icons.brightness_6),
+          ),
+          IconButton(
+            onPressed: () {
+              if (Get.locale == Locale('en', 'US')) {
+                Get.updateLocale(Locale('id', 'ID'));
+              } else {
+                Get.updateLocale(Locale('en', 'US'));
+              }
+            },
+            icon: Icon(Icons.language),
+          ),
           IconButton(
             onPressed: () {
               Get.toNamed('/cart');

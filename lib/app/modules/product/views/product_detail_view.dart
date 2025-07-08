@@ -22,7 +22,7 @@ class ProductDetailView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Product Details'),
+        title: Text('product_details'.tr),
         actions: [
           IconButton(
             onPressed: () {
@@ -44,11 +44,11 @@ class ProductDetailView extends StatelessWidget {
               onPressed: () {
                 cartController.addToCart(product);
                 Get.snackbar(
-                  'Added to cart',
+                  'add_to_cart'.tr,
                   '${product.title} added to your cart',
                 );
               },
-              child: Text('Add to Cart'),
+              child: Text('add_to_cart'.tr),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
