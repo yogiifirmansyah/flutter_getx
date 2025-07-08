@@ -21,6 +21,14 @@ class CheckoutView extends StatelessWidget {
 
                 cartController.cartService.clearCart();
 
+                Get.snackbar(
+                  'Order Completed',
+                  'Your order has been successfully placed!',
+                  snackPosition: SnackPosition.BOTTOM,
+                  duration: Duration(seconds: 2),
+                  margin: EdgeInsets.all(8),
+                );
+
                 Get.offAllNamed('/product');
               },
               child: Text('Go to home page'),
