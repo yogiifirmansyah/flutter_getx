@@ -22,21 +22,37 @@ class ProductView extends StatelessWidget {
         ],
       ),
       body: Obx(() {
+        if (productController.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        }
+
+        if (productController.errorMessage.isNotEmpty) {
+          Future.microtask(() {
+            Get.snackbar(
+              'Failed',
+              productController.errorMessage.value,
+              margin: EdgeInsets.all(8),
+              snackPosition: SnackPosition.BOTTOM,
+            );
+            productController.errorMessage.value = ''; // Clear after showing
+          });
+        }
+
         return ListView.builder(
-          itemCount: productController.products.length,
+          itemCount: productController.productLists.length,
           itemBuilder: (context, index) {
-            final product = productController.products[index];
+            final product = productController.productLists[index];
 
             return ListTile(
-              title: Text(product.name),
+              title: Text(product.title),
               subtitle: Text('\$${product.price.toString()}'),
               trailing: IconButton(
                 onPressed: () {
                   cartController.addToCart(product);
-                  // Get.snackbar('Add to cart', '${product.name} added to cart');
+                  // Get.snackbar('Add to cart', '${product.title} added to cart');
                   Get.snackbar(
                     'Add to cart',
-                    '${product.name} added to cart',
+                    '${product.title} added to cart',
                     duration: Duration(seconds: 2),
                     snackPosition: SnackPosition.BOTTOM,
                     icon: Icon(Icons.shopping_cart_checkout),
